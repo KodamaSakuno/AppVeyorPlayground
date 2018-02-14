@@ -1,0 +1,6 @@
+version: '{build}'
+image: Visual Studio 2017
+init:
+- ps: git config --global core.autocrlf true
+on_finish:
+- ps: Write-Host Finished.
