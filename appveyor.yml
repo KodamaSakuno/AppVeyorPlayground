@@ -1,6 +1,8 @@
 version: '{build}'
 image: Visual Studio 2017
 init:
-- ps: git config --global core.autocrlf true
+- ps: |
+    git config --global core.autocrlf true
+    Write-Host $env:DXSDK_DIR
 on_finish:
 - ps: Write-Host Finished.
