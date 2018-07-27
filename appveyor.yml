@@ -8,6 +8,7 @@ install:
 - cmd: git submodule update -q --init
 before_build:
 - ps: |
+    Copy-Item Execute-PreBuildEvent.ps1 Sakuno.UserInterface\scripts\ -Force
     Set-Location Sakuno.UserInterface
     nuget restore
 build:
