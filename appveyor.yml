@@ -11,7 +11,7 @@ before_build:
     Set-Location Sakuno.UserInterface
     nuget restore
 build:
-  project: Sakuno.UserInterfac\Sakuno.UserInterface.sln
+  project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
 on_finish:
 - ps: Write-Host Finished.
