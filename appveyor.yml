@@ -10,16 +10,16 @@ install:
 - cmd: git submodule update -q --init
 before_build:
 - ps: |
-    Copy-Item Execute-PreBuildEvent.ps1 Sakuno.UserInterface\scripts\ -Force
+    Copy-Item Sakuno.UserInterface.csproj Sakuno.UserInterface\src\Sakuno.UserInterface\ -Force 
     nuget restore Sakuno.UserInterface\Sakuno.UserInterface.sln
 build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
 after_test:
-- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\*.nupkg .
+- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\net46\Sakuno.UserInterface.dll .
 artifacts:
-- path: '*.nupkg'
-  name: NuGet
+- path: '*.dll'
+  name: Assembly
 
 on_finish:
 - ps: Write-Host Finished.
