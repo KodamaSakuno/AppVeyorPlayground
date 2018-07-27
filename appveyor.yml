@@ -4,7 +4,7 @@ init:
 - ps: |
     Write-Host Initializing
     git config --global core.autocrlf true
-    git clone https://github.com/KodamaSakuno/Sakuno.UserInterface 2>&1 | Out-Null
+    git clone -q https://github.com/KodamaSakuno/Sakuno.UserInterface
 before_build:
 - cmd: nuget restore
 build:
