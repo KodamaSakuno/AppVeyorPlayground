@@ -1,5 +1,6 @@
 version: '{build}'
 image: Visual Studio 2017
+configuration: Release
 init:
 - ps: |
     Write-Host Initializing...
@@ -10,9 +11,7 @@ install:
 before_build:
 - ps: |
     Copy-Item Execute-PreBuildEvent.ps1 Sakuno.UserInterface\scripts\ -Force
-    Set-Location Sakuno.UserInterface
-    nuget restore
-    Set-Location ..
+    nuget restore -SolutionDirectory Sakuno.UserInterface
 build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
