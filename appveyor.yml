@@ -8,18 +8,9 @@ init:
 install:
 - cmd: git submodule update -q --init
 before_build:
-- ps: |
-    Copy-Item Sakuno.UserInterface.csproj Sakuno.UserInterface\src\Sakuno.UserInterface\ -Force 
-    nuget restore Sakuno.UserInterface\Sakuno.UserInterface.sln
+- ps: nuget restore Sakuno.UserInterface\Sakuno.UserInterface.sln
 build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
-  verbosity: minimal
-after_test:
-- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\net462\Sakuno.UserInterface.dll .
-artifacts:
-- path: '*.dll'
-  name: Assembly
-- path: 'Sakuno.UserInterface\src\Sakuno.UserInterface\Media\Effects\*.ps'
-  name: Pixel Shader
+  verbosity: detailed
 on_finish:
 - ps: Write-Host Finished.
