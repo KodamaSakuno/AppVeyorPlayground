@@ -14,5 +14,11 @@ before_build:
 build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
+after_test:
+- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\*.nupkg .
+artifacts:
+- path: '*.nupkg'
+  name: NuGet
+
 on_finish:
 - ps: Write-Host Finished.

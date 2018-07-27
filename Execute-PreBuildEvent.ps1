@@ -33,9 +33,9 @@ $effectsDir = Join-Path $SolutionDir "src\Sakuno.UserInterface\Media\Effects"
 Write-Host "Compiling effect files..."
 
 foreach ($file in Get-ChildItem $effectsDir -Filter "*.fx") {
-    Write-Host $file
+    if ($null -eq $targetLastWriteTime -or $file.LastWriteTime -gt $targetLastWriteTime) {
+        Write-Host "Compiling $file"
 
-    if ($targetLastWriteTime -eq $null -or $file.LastWriteTime -gt $targetLastWriteTime) {
         $outputPath = Join-Path $file.Directory.FullName ($file.Basename + ".ps")
 
         & $compilerPath "/T", "ps_3_0", "/E", "main", "/Fo", $outputPath, $file.FullName | Out-Null
