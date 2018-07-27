@@ -11,7 +11,7 @@ install:
 before_build:
 - ps: |
     Copy-Item Execute-PreBuildEvent.ps1 Sakuno.UserInterface\scripts\ -Force
-    nuget restore -SolutionDirectory Sakuno.UserInterface
+    nuget restore Sakuno.UserInterface\Sakuno.UserInterface.sln
 build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
