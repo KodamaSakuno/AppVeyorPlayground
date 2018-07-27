@@ -7,7 +7,9 @@ init:
 install:
 - cmd: git submodule update -q --init
 before_build:
-- cmd: nuget restore
+- ps: |
+    Set-Location Sakuno.UserInterface
+    nuget restore
 build:
   project: Sakuno.UserInterfac\Sakuno.UserInterface.sln
   verbosity: minimal
