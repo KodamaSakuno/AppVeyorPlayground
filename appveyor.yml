@@ -16,7 +16,7 @@ build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
 after_test:
-- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\net46\Sakuno.UserInterface.dll .
+- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\net462\Sakuno.UserInterface.dll .
 artifacts:
 - path: '*.dll'
   name: Assembly
