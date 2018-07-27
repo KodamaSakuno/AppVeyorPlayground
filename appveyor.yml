@@ -2,7 +2,8 @@ version: '{build}'
 image: Visual Studio 2017
 init:
 - ps: |
-    Write-Host Initializing
+    Write-Host Initializing...
+    Write-Host $env:APPVEYOR_BUILD_FOLDER
     git config --global core.autocrlf true
 install:
 - cmd: git submodule update -q --init
@@ -11,11 +12,12 @@ before_build:
     Copy-Item Execute-PreBuildEvent.ps1 Sakuno.UserInterface\scripts\ -Force
     Set-Location Sakuno.UserInterface
     nuget restore
+    Set-Location ..
 build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
 after_test:
-- ps: Move-Item artifacts\$($env:configuration)\*.nupkg $env:APPVEYOR_BUILD_FOLDER
+- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\*.nupkg .
 artifacts:
 - path: '*.nupkg'
   name: NuGet
