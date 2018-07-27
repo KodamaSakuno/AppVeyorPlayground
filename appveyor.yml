@@ -2,7 +2,13 @@ version: '{build}'
 image: Visual Studio 2017
 init:
 - ps: |
+    Write-Host Initializing
     git config --global core.autocrlf true
-    Write-Host $env:DXSDK_DIR
+    git clone https://github.com/KodamaSakuno/Sakuno.UserInterface
+before_build:
+- cmd: nuget restore
+build:
+  project: Sakuno.UserInterfac\Sakuno.UserInterface.sln
+  verbosity: minimal
 on_finish:
 - ps: Write-Host Finished.
