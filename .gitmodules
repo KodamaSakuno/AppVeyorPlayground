@@ -1,0 +1,3 @@
+[submodule "Sakuno.UserInterface"]
+	path = Sakuno.UserInterface
+	url = https://github.com/KodamaSakuno/Sakuno.UserInterface
