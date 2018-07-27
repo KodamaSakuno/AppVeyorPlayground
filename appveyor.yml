@@ -4,7 +4,8 @@ init:
 - ps: |
     Write-Host Initializing
     git config --global core.autocrlf true
-    git submodule update -q --init
+install:
+- cmd: git submodule update -q --init
 before_build:
 - cmd: nuget restore
 build:
