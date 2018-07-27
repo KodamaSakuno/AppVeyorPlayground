@@ -15,7 +15,7 @@ build:
   project: Sakuno.UserInterface\Sakuno.UserInterface.sln
   verbosity: minimal
 after_test:
-- ps: Move-Item Sakuno.UserInterface\artifacts\$($env:configuration)\*.nupkg .
+- ps: Move-Item artifacts\$($env:configuration)\*.nupkg .
 artifacts:
 - path: '*.nupkg'
   name: NuGet

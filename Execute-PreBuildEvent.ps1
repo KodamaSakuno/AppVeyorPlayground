@@ -38,7 +38,7 @@ foreach ($file in Get-ChildItem $effectsDir -Filter "*.fx") {
 
         $outputPath = Join-Path $file.Directory.FullName ($file.Basename + ".ps")
 
-        & $compilerPath "/T", "ps_3_0", "/E", "main", "/Fo", $outputPath, $file.FullName | Out-Null
+        & $compilerPath "/T", "ps_3_0", "/E", "main", "/Fo", $outputPath, $file.FullName
 
         if ($LASTEXITCODE -ne 0) {
             $host.SetShouldExit($LASTEXITCODE)
