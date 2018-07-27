@@ -4,7 +4,6 @@ configuration: Release
 init:
 - ps: |
     Write-Host Initializing...
-    Write-Host $env:APPVEYOR_BUILD_FOLDER
     git config --global core.autocrlf true
 install:
 - cmd: git submodule update -q --init
@@ -20,6 +19,7 @@ after_test:
 artifacts:
 - path: '*.dll'
   name: Assembly
-
+- path: 'Sakuno.UserInterface\src\Sakuno.UserInterface\Media\Effects\*.ps'
+  name: Pixel Shader
 on_finish:
 - ps: Write-Host Finished.
