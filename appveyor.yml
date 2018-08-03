@@ -3,13 +3,7 @@ image: Visual Studio 2017
 configuration: Release
 init:
 - ps: |
-    Write-Host Initializing...
+    Write-Host $env:APPVEYOR_BUILD_FOLDER
     git config --global core.autocrlf true
-install:
-- cmd: git submodule update -q --init
-before_build:
-- ps: nuget restore Sakuno.UserInterface\Sakuno.UserInterface.sln
-build_script:
-- cmd: 'msbuild Sakuno.UserInterface\Sakuno.UserInterface.sln /p:Configuration=Release /p:MSBuildTargetsVerbose=true /verbosity:d'
 on_finish:
 - ps: Write-Host Finished.
