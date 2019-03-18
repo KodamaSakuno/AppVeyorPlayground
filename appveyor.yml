@@ -9,7 +9,7 @@ init:
 install:
 - ps: |
     git submodule update -q --init
-    $CefSharpCommonVersion = (Select-Xml -Path .\Versions.props -Namespace @{ ns = "http://schemas.microsoft.com/developer/msbuild/2003" } -XPath "/ns:Project/ns:PropertyGroup/ns:CefSharpCommonVersion/text()").Node.Value
+    $CefSharpCommonVersion = (Select-Xml -Path Sakuno.CefSharp.Wpf\nuget\Versions.props -Namespace @{ ns = "http://schemas.microsoft.com/developer/msbuild/2003" } -XPath "/ns:Project/ns:PropertyGroup/ns:CefSharpCommonVersion/text()").Node.Value
 before_build:
 - ps: nuget restore Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.sln
 build_script:
@@ -18,5 +18,5 @@ build_script:
     msbuild Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj /p:Platform=x64,Configuration=$env:CONFIGURATION /v:m
 after_build:
 - ps: |
-    Get-ChildItem -Recurse -Path artifacts -Filter Sakuno.CefSharp.Wpf.dll | Select-Object FullName, Length
-    nuget pack .\nuget\Sakuno.CefSharp.Wpf.nuspec -Version $CefSharpCommonVersion -Properties SolutionDir=$(Get-Location)\ -Properties CefSharpCommonVersion=$CefSharpCommonVersion
+    Get-ChildItem -Recurse -Path Sakuno.CefSharp.Wpf\artifacts -Filter Sakuno.CefSharp.Wpf.dll | Select-Object FullName, Length
+    nuget pack Sakuno.CefSharp.Wpf\nuget\Sakuno.CefSharp.Wpf.nuspec -Version $CefSharpCommonVersion -Properties SolutionDir=$(Get-Location)\Sakuno.CefSharp.Wpf\ -Properties CefSharpCommonVersion=$CefSharpCommonVersion
