@@ -9,9 +9,6 @@ install:
 - cmd: git submodule update -q --init
 before_build:
 - ps: nuget restore Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.sln
-build:
-  project: Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj
-  verbosity: minimal
 build_script:
 - ps: |
     msbuild Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj /p:Platform=x86,Configuration=$env:CONFIGURATION /v:m
