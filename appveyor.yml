@@ -1,8 +1,5 @@
 version: '{build}'
 image: Visual Studio 2019 Preview
-platform:
-- x86
-- x64
 configuration: Release
 init:
 - ps: |
@@ -15,6 +12,10 @@ before_build:
 build:
   project: Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj
   verbosity: minimal
+build_script:
+- ps: |
+    msbuild Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj /p:Platform=x86,Configuration=$env:CONFIGURATION /v:m
+    msbuild Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj /p:Platform=x64,Configuration=$env:CONFIGURATION /v:m
 on_finish:
 - ps: |
     Get-ChildItem -Recurse -Filter Sakuno.CefSharp.Wpf.dll | Select-Object FullName, Length
