@@ -13,7 +13,7 @@ install:
 before_build:
 - ps: nuget restore Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.sln
 build:
-  project: src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj
+  project: Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj
   verbosity: minimal
 on_finish:
 - ps: |
