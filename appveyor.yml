@@ -3,20 +3,8 @@ image: Visual Studio 2019 Preview
 configuration: Release
 init:
 - ps: |
-    $(PSVersionTable)
-    Write-Host Initializing...
+    $PSVersionTable
+    $env:APPVEYOR_BUILD_FOLDER
     git config --global core.autocrlf true
-install:
-- ps: |
-    git submodule update -q --init
-    $CefSharpCommonVersion = (Select-Xml -Path Sakuno.CefSharp.Wpf\nuget\Versions.props -Namespace @{ ns = "http://schemas.microsoft.com/developer/msbuild/2003" } -XPath "/ns:Project/ns:PropertyGroup/ns:CefSharpCommonVersion/text()").Node.Value
-before_build:
-- ps: nuget restore Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.sln
-build_script:
-- ps: |
-    msbuild Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj /p:Platform=x86,Configuration=$env:CONFIGURATION /v:m
-    msbuild Sakuno.CefSharp.Wpf\src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj /p:Platform=x64,Configuration=$env:CONFIGURATION /v:m
-after_build:
-- ps: |
-    Get-ChildItem -Recurse -Path Sakuno.CefSharp.Wpf\artifacts -Filter Sakuno.CefSharp.Wpf.dll | Select-Object FullName, Length
-    nuget pack Sakuno.CefSharp.Wpf\nuget\Sakuno.CefSharp.Wpf.nuspec -Version $CefSharpCommonVersion -Properties SolutionDir=$(Get-Location)\Sakuno.CefSharp.Wpf\ -Properties CefSharpCommonVersion=$CefSharpCommonVersion
+on_finish:
+- ps: Write-Host Finished.
