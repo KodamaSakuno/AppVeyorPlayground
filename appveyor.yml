@@ -1,5 +1,8 @@
 version: '{build}'
 image: Visual Studio 2019 Preview
+platform:
+- x86
+- x64
 configuration: Release
 init:
 - ps: |
@@ -10,7 +13,7 @@ install:
 before_build:
 - ps: nuget restore Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.sln
 build:
-  project: Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.sln
+  project: src\Sakuno.CefSharp.Wpf\Sakuno.CefSharp.Wpf.csproj
   verbosity: minimal
 on_finish:
 - ps: |
