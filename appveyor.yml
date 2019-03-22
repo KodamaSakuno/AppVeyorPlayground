@@ -4,7 +4,13 @@ configuration: Release
 init:
 - ps: |
     $PSVersionTable
+    Write-Host
     $env:APPVEYOR_BUILD_FOLDER
+    Write-Host
+    dotnet --list-runtimes
+    Write-Host
+    dotnet --list-sdks
     git config --global core.autocrlf true
+build_script:
 on_finish:
 - ps: Write-Host Finished.
