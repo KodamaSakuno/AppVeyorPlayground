@@ -9,8 +9,8 @@ init:
     git config --global core.autocrlf true
 install:
 - ps: |
-    (Get-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0").GetValue("InstallationFolder")
-    (Get-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0").GetValue("ProductVersion")
+    Get-Item -Path "Registry::HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0"
+    Get-Item -Path "Registry::HKLM\SOFTWARE\Microsoft\Windows Kits\Installed Roots"
 build_script:
 - ps: |
     Write-Host 'Build Script'
