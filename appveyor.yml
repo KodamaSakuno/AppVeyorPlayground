@@ -6,19 +6,13 @@ init:
     $PSVersionTable
     Write-Host
     $env:APPVEYOR_BUILD_FOLDER
-    Write-Host
-    dotnet --list-runtimes
-    Write-Host
-    dotnet --list-sdks
     git config --global core.autocrlf true
 install:
 - ps: |
-    Start-FileDownload 'https://download.visualstudio.microsoft.com/download/pr/31b5b67f-b787-4f73-a728-5ec61f10a4de/be6430bcd9a62f610cd9f12f8cc2c736/dotnet-sdk-3.0.100-preview3-010431-win-x64.exe'
-    Start-Process .\dotnet-sdk-3.0.100-preview3-010431-win-x64.exe "/install /norestart /quiet /log sdkinstall.log" -NoNewWindow -Wait
+    (Get-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0").GetValue("InstallationFolder")
+    (Get-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0").GetValue("ProductVersion")
 build_script:
 - ps: |
-    dotnet --list-runtimes
-    Write-Host
-    dotnet --list-sdks
+    Write-Host 'Build Script'
 on_finish:
 - ps: Write-Host Finished.
