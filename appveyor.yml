@@ -1,16 +1,23 @@
 version: '{build}'
 image: Visual Studio 2019 Preview
+environment:
+  global:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
 configuration: Release
+clone_depth: 1
 init:
 - ps: |
     $PSVersionTable
-    Write-Host
     $env:APPVEYOR_BUILD_FOLDER
+    dotnet --list-sdks
     git config --global core.autocrlf true
 install:
 - ps: |
     Get-Item -Path "Registry::HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0"
     Get-Item -Path "Registry::HKLM\SOFTWARE\Microsoft\Windows Kits\Installed Roots"
+before_build:
+- cmd: dotnet restore -v m
 build_script:
 - ps: |
     Write-Host 'Build Script'
